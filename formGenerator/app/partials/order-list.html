@@ -1,8 +1,7 @@
 <div class="container-fluid">
-  <div class="row-fluid">
+  <div class="row-fluid" ng:controller="CartForm">
     <div class="span2">
       <!--Sidebar content-->
-
       Search: <input ng-model="query">
       Sort by:
       <select ng-model="orderProp">
@@ -13,12 +12,27 @@
 				<option value="size">Size</option>
 				<option value="value2">BPC</option>
       </select>
-
+			<table class="table">
+        <tr>
+            
+            <th>Wines</th>
+        </tr>
+				
+        <tr ng:repeat="item in invoice.items">
+            <td>{{item.description}}</td>           
+              
+            <td>
+                [<a href ng:click="removeItem($index)">X</a>]
+            </td>
+        </tr>
+    </table>
+		<button type="button" class="btn btn-success btn-large" ng:click="hideItem(mainTable)">Checkout</button>	
+			
     </div>
     <div class="span10">
       <!--Body content-->
 			
-      <table class="table">
+      <table class="table" id="mainTable">
         <thead>
           <tr>
 							<th>Product Number</th>
@@ -30,17 +44,41 @@
           </tr>
         </thead>
         <tbody ng-repeat="order in orders | filter:query | orderBy:orderProp">
-          <tr>
+          <tr >
 							<td>{{order.code}}</td>
 							<td>{{order.value1}}</td>
 							<td>{{order.description}}</td>
 							<td>{{order.price}}</td>
 							<td>{{order.size}}</td>
-							<td>{{order.value2}}</td>
+							<td>{{order.value2}} <button type="button" class="btn btn-default btn-mini" ng:click="addItem(order)">Add</button></td>
 					</tr>
         </tbody>
       </table>
-
+			<table class="table" id="orderForm">
+        <thead>
+          <tr>
+							<th>Product Number</th>
+            	<th>TAG</th>  
+							<th>Description</th>
+							<th>Price</th>
+            	<th>Size</th>
+							<th>BPC</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="order in invoice.items">
+          <tr >
+							<td>{{order.code}}</td>
+							<td>{{order.tag}}</td>
+							<td>{{order.description}}</td>
+							<td>{{order.price}}</td>
+							<td>{{order.size}}</td>
+							<td>{{order.bpc}}</td>
+					</tr>
+        </tbody>
+      </table>
+			
+			
+			
     </div>
   </div>
 </div>
