@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="description">Description</option>
+        <option value="code">Product number</option>
+				<option value="price">Price</option>
+				<option value="value1">TAG</option>
+				<option value="size">Size</option>
+				<option value="value2">BPC</option>
+      </select>
+
+    </div>
+    <div class="span10">
+      <!--Body content-->
+			
+      <table class="table">
+        <thead>
+          <tr>
+							<th>Product Number</th>
+            	<th>TAG</th>  
+							<th>Description</th>
+							<th>Price</th>
+            	<th>Size</th>
+							<th>BPC</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="order in orders | filter:query | orderBy:orderProp">
+          <tr>
+							<td>{{order.code}}</td>
+							<td>{{order.value1}}</td>
+							<td>{{order.description}}</td>
+							<td>{{order.price}}</td>
+							<td>{{order.size}}</td>
+							<td>{{order.value2}}</td>
+					</tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

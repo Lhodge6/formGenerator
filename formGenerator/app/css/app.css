@@ -1,0 +1,96 @@
+body {
+  background-color:#46483E;
+  background-position:initial initial;
+  background-repeat:initial initial;
+  border-top-color:#8CC84B;
+  border-top-style:solid;
+  border-top-width:6px;
+  color:#EEEEEE;
+  font-family:'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Tahoma, sans-serif;
+  font-size:12px;
+  line-height:180%;
+  padding-top:40px;
+}
+body.alt {
+  background-color:white;
+  background-position:initial initial;
+  background-repeat:initial initial;
+  color:#46483E;
+}
+body.int {
+  padding-top:49px;
+}
+.phones {
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  color:#D2D8BA;
+  font-family:Helvetica, Arial, sans-serif;
+  margin:2em 0 10px;
+  text-transform:uppercase;
+}
+h1 {
+  color:#669900;
+  font-family:Georgia, FreeSerif, Times, serif;
+  font-size:30px;
+  font-weight:normal;
+  line-height:36px;
+  margin:15px 0 11px;
+  text-transform:none;
+}
+h2 {
+  font-size:12px;
+  font-weight:normal;
+}
+h1 code, h2 code, h3 code, h4 code, h1 a, h2 a, h3 a, h4 a {
+  color:inherit;
+  font-size:inherit;
+}
+#intro {
+  color:#D2D8BA;
+  margin:0 auto;
+  text-align:center;
+}
+#intro p.version {
+  font-size:12px;
+  padding-top:10px;
+}
+#intro .buttons {
+  height:auto;
+  margin:0 auto;
+  overflow:hidden;
+  width:300px;
+}
+#intro .button {
+  -webkit-transition:all 0.2s ease-in-out;
+  background-color:#9A9F8B;
+  border-bottom-left-radius:2px;
+  border-bottom-right-radius:2px;
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
+  color:#46483E;
+  display:inline-block;
+  font-family:helvetica, arial, sans-serif;
+  font-size:12px;
+  line-height:36px;
+  margin:10px 4px;
+  text-transform:uppercase;
+  transition:all 0.2s ease-in-out;
+  width:96px;
+}
+#intro .button:hover {
+  background-color:#AAB293;
+  text-decoration:none;
+}
+#intro .downloadbutton {
+  background-color:#8BC84B;
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  margin:30px auto 0;
+  width:200px;
+}
+#intro .downloadbutton:hover {
+  background-color:#73A53E;
+}
