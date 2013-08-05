@@ -30,7 +30,7 @@ function PhoneDetailCtrl($scope, $routeParams, Phone) {
 }
 
 function CartForm($scope) {
-    $scope.invoice = {
+    $scope.invoice;/* = {
         items: [{
             code: 1,
             tag: "tag",
@@ -39,17 +39,30 @@ function CartForm($scope) {
             size: 1,
             bpc: "bpc"
         }]
-    };
+    };    */
 
     $scope.addItem = function(item) {
-        $scope.invoice.items.push({
-            code: item.code,
-            tag: item.value1,
-            description: item.description,
-            price: item.price,
-            size: item.size,
-            bpc: item.value2
-        });
+        if($scope.invoice == null){
+            $scope.invoice = {
+             items: [{
+                 code: item.code,
+                 tag: item.value1,
+                 description: item.description,
+                 price: item.price,
+                 size: item.size,
+                 bpc: item.value2
+             }]
+            };
+        }else{
+            $scope.invoice.items.push({
+                code: item.code,
+                tag: item.value1,
+                description: item.description,
+                price: item.price,
+                size: item.size,
+                bpc: item.value2
+            });
+        }
     },
 
     $scope.removeItem = function(index) {

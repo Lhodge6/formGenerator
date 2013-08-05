@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row-fluid" ng:controller="CartForm">
+    <div class="span12">
+      <!--Body content-->
+			<table class="table" id="orderForm">
+        <thead>
+          <tr>
+							<th>Product Number</th>
+            	<th>TAG</th>  
+							<th>Description</th>
+							<th>Price</th>
+            	<th>Size</th>
+							<th>BPC</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="order in invoice.items">
+          <tr >
+							<td>{{order.code}}</td>
+							<td>{{order.tag}}</td>
+							<td>{{order.description}}</td>
+							<td>{{order.price}}</td>
+							<td>{{order.size}}</td>
+							<td>{{order.bpc}} <button type="button" class="btn btn-default btn-mini" ng:click="removeItem($index)">Remove</button></td></td>
+					</tr>
+        </tbody>
+				<tbody>
+    		 <tr >
+    					<td>{{order.code}}-</td>
+    					<td>{{order.tag}}-</td>
+    					<td>{{order.description}}<input ng-model="query3"></td>
+    					<td>{{order.price}}-</td>
+    					<td>{{order.size}}-</td>
+    					<td>{{order.bpc}}-</td>
+    			</tr>
+				</tbody>
+				<div ng-show="checked">{{(query3.length >= 3) && (filteredData = (orders | filter:query3))}}</div>		
+        <tbody ng-show="query3.length >= 2" ng-repeat="order in filteredData" >
+          <tr >
+							<td>{{order.code}}</td>
+							<td>{{order.value1}}</td>
+							<td>{{order.description}}</td>
+							<td>{{order.price}}</td>
+							<td>{{order.size}}</td>
+							<td>{{order.value2}} <button type="button" class="btn btn-default btn-mini" ng:click="addItem(order)">Add</button></td>
+					</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

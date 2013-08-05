@@ -10,5 +10,6 @@ angular.module('phonecat', ['phonecatFilters', 'phonecatServices']).
       when('/phones/:phoneId', {templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl}).
       when('/login', {templateUrl: 'partials/login.html', controller: OrderListCtrl}).
       when('/orderList', {templateUrl: 'partials/order-list.html', controller: OrderListCtrl}).
+      when('/orderForm', {templateUrl: 'partials/order-form.html', controller: OrderListCtrl}).
       otherwise({redirectTo: '/login'});
 }]);
