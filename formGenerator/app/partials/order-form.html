@@ -5,6 +5,7 @@
 			<table class="table" id="orderForm">
         <thead>
           <tr>
+							<th>Amount</th>
 							<th>Product Number</th>
             	<th>TAG</th>  
 							<th>Description</th>
@@ -15,22 +16,24 @@
         </thead>
         <tbody ng-repeat="order in invoice.items">
           <tr >
+							<td><input type="number" ng:model="order.qty" ng:required class="input-mini"></td>
 							<td>{{order.code}}</td>
 							<td>{{order.tag}}</td>
 							<td>{{order.description}}</td>
-							<td>{{order.price}}</td>
+							<td>{{order.price * order.qty | currency}}</td>
 							<td>{{order.size}}</td>
 							<td>{{order.bpc}} <button type="button" class="btn btn-default btn-mini" ng:click="removeItem($index)">Remove</button></td></td>
 					</tr>
         </tbody>
 				<tbody>
     		 <tr >
-    					<td>{{order.code}}-</td>
-    					<td>{{order.tag}}-</td>
+    					<td>-</td>
+							<td>-</td>
+							<td>-</td>
     					<td>{{order.description}}<input ng-model="query3"></td>
-    					<td>{{order.price}}-</td>
-    					<td>{{order.size}}-</td>
-    					<td>{{order.bpc}}-</td>
+    					<td>Subtotal: {{total() | currency}}</td>
+    					<td>-</td>
+    					<td>-</td>
     			</tr>
 				</tbody>
 				<div ng-show="checked">{{(query3.length >= 3) && (filteredData = (orders | filter:query3))}}</div>		
@@ -39,7 +42,7 @@
 							<td>{{order.code}}</td>
 							<td>{{order.value1}}</td>
 							<td>{{order.description}}</td>
-							<td>{{order.price}}</td>
+							<td>{{order.price | currency}}</td>
 							<td>{{order.size}}</td>
 							<td>{{order.value2}} <button type="button" class="btn btn-default btn-mini" ng:click="addItem(order)">Add</button></td>
 					</tr>

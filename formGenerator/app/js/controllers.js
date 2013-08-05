@@ -45,6 +45,7 @@ function CartForm($scope) {
         if($scope.invoice == null){
             $scope.invoice = {
              items: [{
+                 qty: 1,
                  code: item.code,
                  tag: item.value1,
                  description: item.description,
@@ -55,6 +56,7 @@ function CartForm($scope) {
             };
         }else{
             $scope.invoice.items.push({
+                qty: 1,
                 code: item.code,
                 tag: item.value1,
                 description: item.description,
@@ -77,9 +79,11 @@ function CartForm($scope) {
 
     $scope.total = function() {
         var total = 0;
-        angular.forEach($scope.invoice.items, function(item) {
-            total += item.qty * item.cost;
-        })
+        if($scope.invoice != null){
+            angular.forEach($scope.invoice.items, function(item) {
+                total += item.qty * item.price;
+            })
+        }
 
         return total;
     }
