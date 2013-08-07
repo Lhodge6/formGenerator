@@ -2,13 +2,41 @@
   <div class="row-fluid" ng:controller="CartForm">
     <div class="span12">
       <!--Body content-->
+			<h1>Customer Information</h1>
+			<div class="span8" style="text-align:right;">
+  			<div class="input-group">
+          <span class="input-group-addon">Account Name:</span>
+          <input type="text" class="form-control" placeholder="Account Name">
+        </div>
+  			<div class="input-group">
+          <span class="input-group-addon">Account Number:</span>
+          <input type="text" class="form-control" placeholder="Account#">
+        </div>
+			</div>		
+			<div class="span3" style="text-align:right;">
+  			<div class="input-group">
+          <span class="input-group-addon">PO Number:</span>
+          <input type="text" class="form-control" placeholder="PO#">
+        </div>
+  			<div class="input-group">
+          <span class="input-group-addon">Date:</span>
+          <input type="text" class="form-control" placeholder=>
+        </div>
+			</div>				
 			<table class="table" id="orderForm">
         <thead>
           <tr>
 							<th>Cases</th>
 							<th>Product Number</th>  
 							<th>Description</th>
+							<th></th>
             	<th>Size</th>
+							<th></th>
+							<th><div class="btn-group">
+                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-success"  ng:click="download()">Download</button>
+								<a href="" id="download">Download</a>
+              </div></th>
           </tr>
         </thead>
         <tbody ng-repeat="order in invoice.items">
@@ -16,7 +44,10 @@
 							<td><input type="number" ng:model="order.qty" ng:required class="input-mini"></td>
 							<td>{{order.code}}</td>
 							<td>{{order.description}}</td>
-							<td>{{order.size}} <button type="button" class="btn btn-default btn-mini" ng:click="removeItem($index)">Remove</button></td>
+							<td></td>
+							<td>{{order.size}}</td>
+							<td></td>
+							<td><button type="button" class="btn btn-danger btn-mini" ng:click="removeItem($index)">Remove</button></td>
 					</tr>
         </tbody>
 				<tbody>
@@ -27,6 +58,7 @@
 							<td>Price</td>
 							<td>Size</td>
     					<td>BPC</td>
+							<td></td>
     			</tr>
 				</tbody>
 				<div ng-show="checked">{{(query3.length >= 3) && (filteredData = (orders | filter:query3))}}</div>		
@@ -37,7 +69,8 @@
 							<td>{{order.description}}</td>
 							<td>{{order.price | currency}}</td>
 							<td>{{order.size}}</td>
-							<td>{{order.value2}} <button type="button" class="btn btn-default btn-mini" ng:click="addItem(order)">Add</button></td>
+							<td>{{order.value2}}</td>
+							<td><button type="button" class="btn btn-success btn-mini" ng:click="addItem(order)">Add</button></td>
 					</tr>
         </tbody>
       </table>

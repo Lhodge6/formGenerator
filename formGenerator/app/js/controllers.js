@@ -1,6 +1,11 @@
-'use strict';
+
 
 /* Controllers */
+var util = require('util'),
+    http = require('http'),
+    fs = require('fs'),
+    url = require('url'),
+    events = require('events');
 
 function PhoneListCtrl($scope, Phone) {
   $scope.phones = Phone.query();
@@ -64,19 +69,27 @@ function CartForm($scope) {
                 size: item.size,
                 bpc: item.value2
             });
+            $scope.download();
         }
     },
 
     $scope.removeItem = function(index) {
         $scope.invoice.items.splice(index, 1);
+        $scope.download();
     },
-        $scope.hideItem = function(item) {
-            item.visibility = false;
-        },
-        $scope.showItem = function(item) {
-            item.visibility = true;
-        },
-
+    $scope.hideItem = function(item) {
+        item.visibility = false;
+    },
+    $scope.showItem = function(item) {
+        item.visibility = true;
+    },
+    $scope.download = function() {
+        var temp = JSON.stringify($scope.invoice.items);
+        temp = btoa(temp);
+        var newLink = document.createElement('link');
+        newLink.href = "data:application/octet-stream;charset=utf-8;base64,"+temp;
+        document.getElementById("download")[0].href("data:application/octet-stream;charset=utf-8;base64,"+temp);
+    },
     $scope.total = function() {
         var total = 0;
         if($scope.invoice != null){
@@ -87,6 +100,7 @@ function CartForm($scope) {
 
         return total;
     }
+
 }
 
 //PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];
