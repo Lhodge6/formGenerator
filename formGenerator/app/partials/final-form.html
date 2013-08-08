@@ -6,26 +6,31 @@
 			<div class="span8" style="text-align:right;">
   			<div class="input-group">
           <span class="input-group-addon">Account Name:</span>
-          <input type="text" class="form-control" placeholder="Account Name">
+          <input ng-model="name" placeholder="Account Name">
         </div>
   			<div class="input-group">
           <span class="input-group-addon">Account Number:</span>
-          <input type="text" class="form-control" placeholder="Account#">
+          <input ng-model="number" placeholder="Account#">
         </div>
 			</div>		
 			<div class="span3" style="text-align:right;">
   			<div class="input-group">
           <span class="input-group-addon">PO Number:</span>
-          <input type="text" class="form-control" placeholder="PO#">
+          <input ng-model="po" placeholder="PO#">
         </div>
-  			<div class="input-group">
-          <span class="input-group-addon">Date:</span>
-          <input type="text" class="form-control" placeholder=>
-        </div>
+				<div class="btn-group">
+    			<button class="btn btn-primary" type="button">Save</button>
+  				<button class="btn btn-success" ng:click="download(name,number,po,date)" type="button">Download</button>
+  			</div>
 			</div>
-			<div class="btn-group">
-  			<button class="btn btn-primary" type="button">Save</button>
-				<button class="btn btn-success" ng:click="download(this)" type="button">Download</button>
+		</div>
+		<div class="row-fluid" style="text-align:right;">
+			<div class="span8">
+  			<div class="span12 input-group">
+          <span class="input-group-addon" >Date:</span>
+          <input ng-model="date" placeholder="">
+        </div>
+  			
 			</div>		
 			<table class="table" id="orderForm">		
         <thead>

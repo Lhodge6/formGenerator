@@ -75,14 +75,24 @@ function CartForm($rootScope) {
         $rootScope.showItem = function(item) {
         item.visibility = true;
     },
-        $rootScope.download = function(lnk_obj) {
-        var temp;
-        var tmplt = "case \t size \t county code \t description"
-                    "{{#items}} \n" +
-                    "{{.}}\n" +
-                    "{{/items}}"
-       tmp =  Mustache.render(tmplt, $rootScope.invoice.items);
+        $rootScope.download = function(name,number,po,date) {
+        var items = $rootScope.invoice.items;
+        var temp = "Account Name: " + name + "\tPO Number: " + po + "\nAccount Number: " + number + "\tDate: " + date + "\ncase \t size \t county code \t description";
+        angular.forEach(items, function(item) {
+            if(item.code < 100000){
+                temp = temp + "\n" + item.qty +"\t" + item.size + "  \t" + item.code + "\t\t\t" + item.description;
+            }else{
+                temp = temp + "\n" + item.qty +"\t" + item.size + "  \t" + item.code + "\t\t" + item.description;
+            }
+        })
 
+
+
+        /*var tmplt = "{{#items}} \n" +
+                    "{{.}}\n" +
+                    "{{/items}}";//"case \t size \t county code \t description\n"  +
+        var temp =  Mustache.render(tmplt, items);
+          */
 
 
         temp = btoa(temp);
