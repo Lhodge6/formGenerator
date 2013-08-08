@@ -5,6 +5,8 @@ var util = require('util'),
     fs = require('fs'),
     url = require('url'),
     events = require('events');
+var express = require('express')
+    , expose = require('express-expose');
 
 var DEFAULT_PORT = 8000;
 
@@ -13,6 +15,13 @@ function main(argv) {
     'GET': createServlet(StaticServlet),
     'HEAD': createServlet(StaticServlet)
   }).start(Number(argv[2]) || DEFAULT_PORT);
+}
+
+function writeToFile(name,data){
+    fs.writeFile(name, data, function (err) {
+        if (err) return console.log(err);
+        console.log('Write to ' + name + ' failed');
+    });
 }
 
 function escapeHtml(value) {

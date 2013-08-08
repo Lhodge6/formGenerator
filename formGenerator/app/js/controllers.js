@@ -1,12 +1,6 @@
 
 
 /* Controllers */
-var util = require('util'),
-    http = require('http'),
-    fs = require('fs'),
-    url = require('url'),
-    events = require('events');
-
 function PhoneListCtrl($scope, Phone) {
   $scope.phones = Phone.query();
   $scope.orderProp = 'age';
@@ -24,7 +18,7 @@ function OrderListCtrl($scope, Phone) {
 
 
 
-function PhoneDetailCtrl($scope, $routeParams, Phone) {
+function PhoneDetailCtrl($rootScope, $scope, $routeParams, Phone) {
   $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
     $scope.mainImageUrl = phone.images[0];
   });
@@ -34,8 +28,8 @@ function PhoneDetailCtrl($scope, $routeParams, Phone) {
   }
 }
 
-function CartForm($scope) {
-    $scope.invoice;/* = {
+function CartForm($rootScope) {
+    $rootScope.invoice;/* = {
         items: [{
             code: 1,
             tag: "tag",
@@ -46,9 +40,9 @@ function CartForm($scope) {
         }]
     };    */
 
-    $scope.addItem = function(item) {
-        if($scope.invoice == null){
-            $scope.invoice = {
+    $rootScope.addItem = function(item) {
+        if($rootScope.invoice == null){
+            $rootScope.invoice = {
              items: [{
                  qty: 1,
                  code: item.code,
@@ -60,7 +54,7 @@ function CartForm($scope) {
              }]
             };
         }else{
-            $scope.invoice.items.push({
+            $rootScope.invoice.items.push({
                 qty: 1,
                 code: item.code,
                 tag: item.value1,
@@ -69,31 +63,35 @@ function CartForm($scope) {
                 size: item.size,
                 bpc: item.value2
             });
-            $scope.download();
         }
     },
 
-    $scope.removeItem = function(index) {
-        $scope.invoice.items.splice(index, 1);
-        $scope.download();
+        $rootScope.removeItem = function(index) {
+            $rootScope.invoice.items.splice(index, 1);
     },
-    $scope.hideItem = function(item) {
+        $rootScope.hideItem = function(item) {
         item.visibility = false;
     },
-    $scope.showItem = function(item) {
+        $rootScope.showItem = function(item) {
         item.visibility = true;
     },
-    $scope.download = function() {
-        var temp = JSON.stringify($scope.invoice.items);
+        $rootScope.download = function(lnk_obj) {
+        var temp;
+        var tmplt = "case \t size \t county code \t description"
+                    "{{#items}} \n" +
+                    "{{.}}\n" +
+                    "{{/items}}"
+       tmp =  Mustache.render(tmplt, $rootScope.invoice.items);
+
+
+
         temp = btoa(temp);
-        var newLink = document.createElement('link');
-        newLink.href = "data:application/octet-stream;charset=utf-8;base64,"+temp;
-        document.getElementById("download")[0].href("data:application/octet-stream;charset=utf-8;base64,"+temp);
-    },
-    $scope.total = function() {
+        window.open("data:application/octet-stream;charset=utf-8;base64,"+temp);
+        },
+        $rootScope.total = function() {
         var total = 0;
-        if($scope.invoice != null){
-            angular.forEach($scope.invoice.items, function(item) {
+        if($rootScope.invoice != null){
+            angular.forEach($rootScope.invoice.items, function(item) {
                 total += item.qty * item.price;
             })
         }

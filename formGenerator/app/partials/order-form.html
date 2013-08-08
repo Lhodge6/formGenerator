@@ -1,28 +1,7 @@
 <div class="container-fluid">
   <div class="row-fluid" ng:controller="CartForm">
     <div class="span12">
-      <!--Body content-->
-			<h1>Customer Information</h1>
-			<div class="span8" style="text-align:right;">
-  			<div class="input-group">
-          <span class="input-group-addon">Account Name:</span>
-          <input type="text" class="form-control" placeholder="Account Name">
-        </div>
-  			<div class="input-group">
-          <span class="input-group-addon">Account Number:</span>
-          <input type="text" class="form-control" placeholder="Account#">
-        </div>
-			</div>		
-			<div class="span3" style="text-align:right;">
-  			<div class="input-group">
-          <span class="input-group-addon">PO Number:</span>
-          <input type="text" class="form-control" placeholder="PO#">
-        </div>
-  			<div class="input-group">
-          <span class="input-group-addon">Date:</span>
-          <input type="text" class="form-control" placeholder=>
-        </div>
-			</div>				
+      <!--Body content-->		
 			<table class="table" id="orderForm">
         <thead>
           <tr>
@@ -33,9 +12,7 @@
             	<th>Size</th>
 							<th></th>
 							<th><div class="btn-group">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-success"  ng:click="download()">Download</button>
-								<a href="" id="download">Download</a>
+                <a href="#/checkout" class="btn btn-success" id="checkout">checkout</a>
               </div></th>
           </tr>
         </thead>
