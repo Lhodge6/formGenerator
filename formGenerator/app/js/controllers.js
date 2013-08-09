@@ -1,44 +1,21 @@
 
 
 /* Controllers */
-function PhoneListCtrl($scope, Phone) {
-  $scope.phones = Phone.query();
-  $scope.orderProp = 'age';
-}
-function PhoneListCtrl2($scope, Phone) {
-    $scope.orders = Phone.query();
-    $scope.orderProp = 'age';
+
+function OrderListCtrl($rootScope, Order) {
+    $rootScope.orders = Order.query();
+    $rootScope.orderProp = 'description';
+    //Order.post(items);
 }
 
-function OrderListCtrl($scope, Phone) {
-    $scope.orders = Phone.query();
-    $scope.orderProp = 'description';
-}
-//PhoneListCtrl.$inject = ['$scope', 'Phone'];
+function CartForm($rootScope,$scope, Order) {
+    $rootScope.invoice;
+    $rootScope.orders = Order.query();
+    $rootScope.saveList = function(){
+        Order.post($rootScope.invoice.items);
+    }
 
 
-
-function PhoneDetailCtrl($rootScope, $scope, $routeParams, Phone) {
-  $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-    $scope.mainImageUrl = phone.images[0];
-  });
-
-  $scope.setImage = function(imageUrl) {
-    $scope.mainImageUrl = imageUrl;
-  }
-}
-
-function CartForm($rootScope) {
-    $rootScope.invoice;/* = {
-        items: [{
-            code: 1,
-            tag: "tag",
-            description: "Description",
-            price: 1,
-            size: 1,
-            bpc: "bpc"
-        }]
-    };    */
 
     $rootScope.addItem = function(item) {
         if($rootScope.invoice == null){
@@ -75,6 +52,8 @@ function CartForm($rootScope) {
         $rootScope.showItem = function(item) {
         item.visibility = true;
     },
+
+
         $rootScope.download = function(name,number,po,date) {
         var items = $rootScope.invoice.items;
         var temp = "Account Name: " + name + "\tPO Number: " + po + "\nAccount Number: " + number + "\tDate: " + date + "\ncase \t size \t county code \t description";
@@ -85,19 +64,14 @@ function CartForm($rootScope) {
                 temp = temp + "\n" + item.qty +"\t" + item.size + "  \t" + item.code + "\t\t" + item.description;
             }
         })
-
-
-
-        /*var tmplt = "{{#items}} \n" +
-                    "{{.}}\n" +
-                    "{{/items}}";//"case \t size \t county code \t description\n"  +
-        var temp =  Mustache.render(tmplt, items);
-          */
-
-
         temp = btoa(temp);
         window.open("data:application/octet-stream;charset=utf-8;base64,"+temp);
+            return temp;
         },
+
+
+
+
         $rootScope.total = function() {
         var total = 0;
         if($rootScope.invoice != null){
@@ -107,6 +81,20 @@ function CartForm($rootScope) {
         }
 
         return total;
+    }
+    function callWebMethod(webMethod, requestParameters, callback) {
+
+        $http({
+            url: '/' + webMethod,
+            method: 'POST',
+            data: requestParameters
+        }).success(function (returnMessage, status, headers, config) {
+
+                callback(returnMessage.data);
+
+            }).error(function (error, status, headers, config) {
+                console.log(error);
+            });
     }
 
 }
