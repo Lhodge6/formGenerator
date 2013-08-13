@@ -1,7 +1,45 @@
+.jumbotron
+    .lead
+        :markdown
+            Add Items to your form or add new items to the database \n
+            double click anything to edit inline and press enter to update it to the database\n
+            click checkout when you are done
+
 .span12
     h2 Items ({{contacts.length}})
+        //a.btn.btn-primary.btn-large(href="#/checkout") Checkout
     p
         input.search-query(type="text", ng-model="search", placeholder="Search")
+
+    table.table.table-striped
+        thead
+            tr
+                th Cases
+                th Product Number
+                th Description
+                th Size
+                th
+                th
+        tbody
+            tr(ng-repeat="contact in invoice.items")
+                td(ng-dblclick="edit(contact, 'cases')")
+                    span(ng-hide="contact.edit=='cases'") {{contact.cases}}
+                    form(ng-show="contact.edit=='cases'", ng-submit="update(contact)")
+                        input(type="number", ng-model="contact.cases", ng:required class="input-mini")
+                td(ng-dblclick="edit(contact, 'code')")
+                    span(ng-hide="contact.edit=='code'") {{contact.code}}
+                    form(ng-show="contact.edit=='code'", ng-submit="update(contact)")
+                        input(ng-model="contact.code")
+                td(ng-dblclick="edit(contact, 'description')")
+                    span(ng-hide="contact.edit=='description'") {{contact.description}}
+                    form(ng-show="contact.edit=='description'", ng-submit="update(contact)")
+                        input(ng-model="contact.description")
+                td(ng-dblclick="edit(contact, 'size')")
+                    span(ng-hide="contact.edit=='size'") {{contact.size}}
+                    form(ng-show="contact.edit=='size'", ng-submit="update(contact)")
+                        input(ng-model="contact.size")
+                td
+                    a.btn.btn-danger.btn-mini(ng-click="removeItem($index)") remove
     .accordion
         .accordion-group
             .accordion-heading#addnew
@@ -36,6 +74,8 @@
                                 tr
                                     td
                                         button.btn.btn-primary(ng-click="addContact()") Submit
+
+
     table.table.table-striped
         div(ng-show='checked') {{(search.length >= 3) && (filteredData = (contacts | filter:search))}}
         thead
@@ -75,15 +115,4 @@
                     form(ng-show="contact.edit=='bpc'", ng-submit="update(contact)")
                         input(ng-model="contact.bpc")
                 td
-                    a(ng-click="")
-                        i.icon-plus-sign
-                td
-                    .accordion
-                        .accordion-group
-                            .accordion-heading#remove
-                                a.accordion-toggle(data-toggle="collapse", data-parent=".accordion", href="#collapseTwo")
-                                    i.icon-remove-sign
-                            .accordion-body.collapse.out#collapseTwo
-                                .accordion-inner
-                                    a(ng-click="")
-                                        a.btn.btn-danger.btn-mini(href="#") Remove
+                    a.btn.btn-success.btn-mini(ng-click="addItem(contact)") add

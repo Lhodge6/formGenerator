@@ -1,5 +1,5 @@
 // app config
-exports.port = 1234;
+exports.port = 8080;
 
 // mongolab.com connection details
 exports.dbuser = 'dbuser';

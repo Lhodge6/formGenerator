@@ -4,6 +4,7 @@ angular.module('project', []).
 	config(function($routeProvider) {
     $routeProvider.
       when('/', {controller:ContactsCtrl, templateUrl:'partials/contacts'}).
+      when('/checkout', {controller:ContactsCtrl, templateUrl:'partials/checkout'}).
       otherwise({redirectTo:'/'});
 	});
 
@@ -11,7 +12,8 @@ angular.module('project', []).
 // controllers
 //------------
 
-function ContactsCtrl($scope, $http, $location) {
+function ContactsCtrl($rootScope ,$scope, $http, $location) {
+  $rootScope.invoice;
   $http.get('/api/contacts').
     success(function(data, status, headers, config) {
       $scope.contacts = data;
@@ -21,7 +23,7 @@ function ContactsCtrl($scope, $http, $location) {
     $http.post('/api/addcontact', $scope.form).
       success(function(data) {
         $scope.contacts.push(data);
-        $scope.form.productNumber = '';
+        $scope.form.code = '';
         $scope.form.tag = '';
         $scope.form.description = '';
         $scope.form.price = '';
@@ -31,7 +33,36 @@ function ContactsCtrl($scope, $http, $location) {
         $("#collapseOne").collapse('toggle');
       });
   };
- 
+
+    $rootScope.addItem = function(item) {
+        if($rootScope.invoice == null){
+            $rootScope.invoice = {
+                items: [{
+                    cases: 1,
+                    code: item.code,
+                    tag: item.tag,
+                    description: item.description,
+                    price: item.price,
+                    size: item.size,
+                    bpc: item.bpc
+                }]
+            };
+        }else{
+            $rootScope.invoice.items.push({
+                cases: 1,
+                code: item.code,
+                tag: item.tag,
+                description: item.description,
+                price: item.price,
+                size: item.size,
+                bpc: item.bpc
+            });
+        }
+    };
+    $rootScope.removeItem = function(index) {
+        $rootScope.invoice.items.splice(index, 1);
+    };
+
   $scope.delete = function(id) {
     $http.post('/api/deletecontact/' + id).
       success(function(data) {

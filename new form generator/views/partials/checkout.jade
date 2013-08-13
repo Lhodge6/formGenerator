@@ -1,0 +1,43 @@
+.jumbotron
+    .lead
+        :markdown
+            Add the customer information and finalize your order \n
+            double click anything to edit inline and press enter to update it to the database\n
+            click download to download the final form directly to your device\n
+            or click save to save the form to the database to be used later
+
+.span12
+    h2 Items ({{invoice.items.length}})
+        //a.btn.btn-primary.btn-large(href="#/checkout") Checkout
+    p
+        //input.search-query(type="text", ng-model="search", placeholder="Search")
+
+    table.table.table-striped
+        thead
+            tr
+                th Cases
+                th Product Number
+                th Description
+                th Size
+                th
+                th
+        tbody
+            tr(ng-repeat="contact in invoice.items")
+                td(ng-dblclick="edit(contact, 'cases')")
+                    span(ng-hide="contact.edit=='cases'") {{contact.cases}}
+                    form(ng-show="contact.edit=='cases'", ng-submit="update(contact)")
+                        input(type="number", ng-model="contact.cases", ng:required class="input-mini")
+                td(ng-dblclick="edit(contact, 'code')")
+                    span(ng-hide="contact.edit=='code'") {{contact.code}}
+                    form(ng-show="contact.edit=='code'", ng-submit="update(contact)")
+                        input(ng-model="contact.code")
+                td(ng-dblclick="edit(contact, 'description')")
+                    span(ng-hide="contact.edit=='description'") {{contact.description}}
+                    form(ng-show="contact.edit=='description'", ng-submit="update(contact)")
+                        input(ng-model="contact.description")
+                td(ng-dblclick="edit(contact, 'size')")
+                    span(ng-hide="contact.edit=='size'") {{contact.size}}
+                    form(ng-show="contact.edit=='size'", ng-submit="update(contact)")
+                        input(ng-model="contact.size")
+                td
+                    a.btn.btn-danger.btn-mini(ng-click="removeItem($index)") remove

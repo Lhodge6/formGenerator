@@ -16,32 +16,26 @@ html(lang="en", ng-app="project")
 
   body(style="padding-top:40px")
     .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
- 
-          a.brand(href="#") Form Generator
- 
-          // these are collapsed at 940px or less    a.btn.btn-primary.btn-large(href="#") Login
-          .nav-collapse.collapse
-            ul.nav
-              li.active
-                a(href="#") Home
-              li
-                a(href="#load") Load
-              li
-                a(href="#new") New
-    
+        .navbar-inner
+            .container
+                a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+
+                a.brand(href="#") Form Generator
+                .nav-collapse.collapse
+                    ul.nav
+                        li.active
+                            a(href="#") Home
+                                li
+                                    a(href="#checkout") Checkout
+                                li
+                                    a(href="#load") Load
     .container(style="margin-top:20px")
 
       .jumbotron
         h1 Form Generator
-        .lead
-          :markdown
-            Add Items to your form or add new items to the database
       hr
 
       .row-fluid.contacts(ng-view)
