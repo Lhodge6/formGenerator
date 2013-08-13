@@ -1,0 +1,19 @@
+{
+  "name": "nomoboan",
+  "description": "nomoboan",
+  "dependencies": {
+    "express": "3.1.0",
+    "mongodb": "*",
+    "mongoose": "*",
+    "jade": "*",
+    "markdown": "*"
+  },
+  "version": "0.0.1-3",
+  "subdomain": "nomoboan",
+  "scripts": {
+    "start": "app.js"
+  },
+  "engines": {
+    "node": "0.8.x"
+  }
+}

@@ -1,0 +1,89 @@
+.span12
+    h2 Items ({{contacts.length}})
+    p
+        input.search-query(type="text", ng-model="search", placeholder="Search")
+    .accordion
+        .accordion-group
+            .accordion-heading#addnew
+                a.accordion-toggle(data-toggle="collapse", data-parent=".accordion", href="#collapseOne")
+                    i.icon-plus-sign
+                    | &nbsp;&nbsp;Add New Item
+            .accordion-body.collapse.out#collapseOne
+                .accordion-inner
+                    form
+                        table
+                            tbody
+                                tr
+                                    td Product Number
+                                    td
+                                        input(type="text", name="productNumber", placeholder="", ng-model="form.code")
+                                    td TAG
+                                    td
+                                        input(type="text", name="tag", placeholder="", ng-model="form.tag")
+                                    td Description
+                                    td
+                                        input(type="text", name="description", placeholder="", ng-model="form.description")
+                                tr
+                                    td Price
+                                    td
+                                        input(type="text", name="price", placeholder="", ng-model="form.price")
+                                    td Size
+                                    td
+                                        input(type="text", name="size", placeholder="", ng-model="form.size")
+                                    td BPC
+                                    td
+                                        input(type="text", name="bpc", placeholder="", ng-model="form.bpc")
+                                tr
+                                    td
+                                        button.btn.btn-primary(ng-click="addContact()") Submit
+    table.table.table-striped
+        div(ng-show='checked') {{(search.length >= 3) && (filteredData = (contacts | filter:search))}}
+        thead
+            tr
+                th Product Number
+                th TAG
+                th Description
+                th Price
+                th Size
+                th BPC
+                th
+                th
+        tbody
+            tr(ng-repeat="contact in filteredData | filter:search | orderBy:'description'")
+                td(ng-dblclick="edit(contact, 'code')")
+                    span(ng-hide="contact.edit=='code'") {{contact.code}}
+                    form(ng-show="contact.edit=='code'", ng-submit="update(contact)")
+                        input(ng-model="contact.code")
+                td(ng-dblclick="edit(contact, 'tag')")
+                    span(ng-hide="contact.edit=='tag'") {{contact.tag}}
+                    form(ng-show="contact.edit=='tag'", ng-submit="update(contact)")
+                        input(ng-model="contact.tag")
+                td(ng-dblclick="edit(contact, 'description')")
+                    span(ng-hide="contact.edit=='description'") {{contact.description}}
+                    form(ng-show="contact.edit=='description'", ng-submit="update(contact)")
+                        input(ng-model="contact.description")
+                td(ng-dblclick="edit(contact, 'price')")
+                    span(ng-hide="contact.edit=='price'") {{contact.price}}
+                    form(ng-show="contact.edit=='price'", ng-submit="update(contact)")
+                        input(ng-model="contact.price")
+                td(ng-dblclick="edit(contact, 'size')")
+                    span(ng-hide="contact.edit=='size'") {{contact.size}}
+                    form(ng-show="contact.edit=='size'", ng-submit="update(contact)")
+                        input(ng-model="contact.size")
+                td(ng-dblclick="edit(contact, 'bpc')")
+                    span(ng-hide="contact.edit=='bpc'") {{contact.bpc}}
+                    form(ng-show="contact.edit=='bpc'", ng-submit="update(contact)")
+                        input(ng-model="contact.bpc")
+                td
+                    a(ng-click="")
+                        i.icon-plus-sign
+                td
+                    .accordion
+                        .accordion-group
+                            .accordion-heading#remove
+                                a.accordion-toggle(data-toggle="collapse", data-parent=".accordion", href="#collapseTwo")
+                                    i.icon-remove-sign
+                            .accordion-body.collapse.out#collapseTwo
+                                .accordion-inner
+                                    a(ng-click="")
+                                        a.btn.btn-danger.btn-mini(href="#") Remove
