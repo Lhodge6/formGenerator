@@ -15,4 +15,5 @@ function ContactsCtrl($scope) {
     $scope.cases = '';
     $location.path('/');
   };
+
 }

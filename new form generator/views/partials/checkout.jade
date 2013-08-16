@@ -7,10 +7,30 @@
             or click save to save the form to the database to be used later
 
 .span12
-    h2 Items ({{invoice.items.length}})
+    h2 {{invoice.items.length}} Items
         //a.btn.btn-primary.btn-large(href="#/checkout") Checkout
+    h1 Customer Information
+    form
+        table
+            tbody
+                tr
+                    td Account Name
+                    td
+                        input(type="text", name="name", placeholder="", ng-model="form.name")
+                    td Account Number
+                    td
+                        input(type="text", name="number", placeholder="", ng-model="form.number")
+                tr
+                    td PO Number
+                    td
+                        input(type="text", name="PO", placeholder="", ng-model="form.PO")
+                    td Date
+                    td
+                        input(type="text", name="Date", placeholder="", ng-model="form.Date")
     p
-        //input.search-query(type="text", ng-model="search", placeholder="Search")
+        div.btn-group
+            a.btn.btn-success.btn-large(ng-click="save(name,number,po,date)") Save
+            a.btn.btn-primary.btn-large(ng-click="download(name,number,po,date)") Download
 
     table.table.table-striped
         thead

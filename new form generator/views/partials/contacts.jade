@@ -6,10 +6,12 @@
             click checkout when you are done
 
 .span12
-    h2 Items ({{contacts.length}})
+    h2 {{contacts.length}} Items
         //a.btn.btn-primary.btn-large(href="#/checkout") Checkout
     p
         input.search-query(type="text", ng-model="search", placeholder="Search")
+    p
+        a.btn.btn-success.btn-large(href="#/checkout") Checkout
 
     table.table.table-striped
         thead

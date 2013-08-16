@@ -1,0 +1,44 @@
+.jumbotron
+    .lead
+        :markdown
+            Select a from fromt he list or\n
+            click new to start a new order form or add new items
+
+.span12
+    h2 {{forms.length}} Forms
+    p
+        input.search-query(type="text", ng-model="search", placeholder="Search")
+    p
+        a.btn.btn-success.btn-large(href="#/shop") New
+
+    table.table.table-striped
+        thead
+            tr
+                th Account Name
+                th Account Number
+                th PO Number
+                th Date
+                th
+                th
+        tbody
+            tr(ng-repeat="form in forms | filter:search | orderBy:'name'")
+                td(ng-dblclick="edit(form, 'cases')")
+                    span(ng-hide="form.edit=='cases'") {{form.name}}
+                    form(ng-show="form.edit=='cases'", ng-submit="update(form)")
+                        input(ng-model="form.cases")
+                td(ng-dblclick="edit(form, 'code')")
+                    span(ng-hide="form.edit=='code'") {{form.number}}
+                    form(ng-show="form.edit=='code'", ng-submit="update(form)")
+                        input(ng-model="form.code")
+                td(ng-dblclick="edit(form, 'description')")
+                    span(ng-hide="form.edit=='description'") {{form.PO}}
+                    form(ng-show="form.edit=='description'", ng-submit="update(form)")
+                        input(ng-model="form.description")
+                td(ng-dblclick="edit(form, 'size')")
+                    span(ng-hide="form.edit=='size'") {{form.date}}
+                    form(ng-show="form.edit=='size'", ng-submit="update(form)")
+                        input(ng-model="form.size")
+                td
+                    a.btn.btn-success.btn-mini() Load
+                td
+                    a.btn.btn-danger.btn-mini() Delete
