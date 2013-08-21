@@ -104,6 +104,12 @@ function ContactsCtrl($rootScope ,$scope, $http, $location) {
                 contact.edit = '';
             });
     };
+    $rootScope.getDistinct = function(){
+        $http.get('/api/formsDistinct').
+            success(function(data, status, headers, config) {
+                $scope.items = data;
+            });
+    }
 
 
 ////////////////////////////////////////////////////
@@ -135,9 +141,10 @@ function ContactsCtrl($rootScope ,$scope, $http, $location) {
     $rootScope.removeItem = function(index) {
         $rootScope.invoice.items.splice(index, 1);
     };
-    $rootScope.download = function(name,number,po,date) {
+    $rootScope.download = function() {
         var items = $rootScope.invoice.items;
-        var temp = "Account Name: " + name + "\tPO Number: " + po + "\nAccount Number: " + number + "\tDate: " + date + "\ncase \t size \t county code \t description";
+        var info = $scope.form;
+        var temp = "Account Name: " + info.name + "\tPO Number: " + info.po + "\nAccount Number: " + info.number + "\tDate: " + info.date + "\ncase \t size \t county code \t description";
         angular.forEach(items, function(item) {
             if(item.code < 100000){
                 temp = temp + "\n" + item.qty +"\t" + item.size + "  \t" + item.code + "\t\t\t" + item.description;
@@ -149,14 +156,15 @@ function ContactsCtrl($rootScope ,$scope, $http, $location) {
         window.open("data:application/octet-stream;charset=utf-8;base64,"+temp);
         return temp;
     };
-    $rootScope.save = function(name,number,po,date) {
+    $rootScope.save = function() {
         var items = $rootScope.invoice.items;
-        angular.forEach(items, function(item,name,number,po,date) {
+        var info = $scope.form;
+        angular.forEach(items, function(item) {
             $scope.addForm({
-                    accountName : name,
-                    AccountNumber   : number,
-                    po  : po,
-                    date    : date,
+                    accountName : info.name,
+                    AccountNumber   : info.number,
+                    po  : info.PO,
+                    date    : info.Date,
                     cases: item.cases,
                     code: item.code,
                     tag: item.tag,
@@ -164,7 +172,7 @@ function ContactsCtrl($rootScope ,$scope, $http, $location) {
                     price: item.price,
                     size: item.size,
                     bpc: item.bpc}
-            );
+            )
         })
     };
 }

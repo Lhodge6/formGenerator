@@ -21,17 +21,17 @@
                 th
                 th
         tbody
-            tr(ng-repeat="form in forms | filter:search | orderBy:'name'")
+            tr(ng-repeat="form in items | filter:search | orderBy:'name'")
                 td(ng-dblclick="edit(form, 'cases')")
-                    span(ng-hide="form.edit=='cases'") {{form.name}}
+                    span(ng-hide="form.edit=='cases'") {{form.accountName}}
                     form(ng-show="form.edit=='cases'", ng-submit="update(form)")
                         input(ng-model="form.cases")
                 td(ng-dblclick="edit(form, 'code')")
-                    span(ng-hide="form.edit=='code'") {{form.number}}
+                    span(ng-hide="form.edit=='code'") {{form.AccountNumber}}
                     form(ng-show="form.edit=='code'", ng-submit="update(form)")
                         input(ng-model="form.code")
                 td(ng-dblclick="edit(form, 'description')")
-                    span(ng-hide="form.edit=='description'") {{form.PO}}
+                    span(ng-hide="form.edit=='description'") {{form.po}}
                     form(ng-show="form.edit=='description'", ng-submit="update(form)")
                         input(ng-model="form.description")
                 td(ng-dblclick="edit(form, 'size')")

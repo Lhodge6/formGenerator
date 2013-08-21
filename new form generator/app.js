@@ -151,9 +151,16 @@ db.once('open', function() {
       res.send(err);
     });
   });
+   ///////////////////////////////////////////////
+    app.get('/api/formsDistinct', function(req, res) {
+        Form.find(function(err, forms) {
+            if (err) console.log('err getting forms: ' + JSON.stringify(err));
+            res.json(forms);
+        });
+    });
 
     app.get('/api/forms', function(req, res) {
-        Form.find(function(err, forms) {
+        Form.find().distinct('accountName',function(err, forms) {
             if (err) console.log('err getting forms: ' + JSON.stringify(err));
             res.json(forms);
         });
